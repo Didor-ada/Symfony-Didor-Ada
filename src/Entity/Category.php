@@ -22,17 +22,6 @@ class Category
      */
     private $name;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Category;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -44,16 +33,5 @@ class Category
 
         return $this;
     }
-
-    public function getCategory(): ?self
-    {
-        return $this->Category;
-    }
-
-    public function setCategory(?self $Category): self
-    {
-        $this->Category = $Category;
-
-        return $this;
-    }
 }
+

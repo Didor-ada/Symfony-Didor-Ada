@@ -12,3 +12,6 @@ import './styles/app.scss';
 import './bootstrap';
 
 //import logoPath from '../images/logo.png';
+import {
+    Tooltip, Toast, Popover
+} from "bootstrap";
