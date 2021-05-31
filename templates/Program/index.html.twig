@@ -9,7 +9,7 @@
         <div>
             <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
             <img src="{{ program.poster }}" alt="images série">
-            <p>{{ program.summary }}</p>
+            <p>{# program.synopsis #}</p>
 
             <a href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
         </div>

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{%  block title %} Série {{ program.id }}
+{%  endblock %}
+
+{%  block body %}
+
+    <h1>programme numéro :{{ program.id }}</h1>
+
+    <img src ="{{ program.poster }}" alt=""{{ program.title }}>
+
+    <h1> {{ program.title }}</h1>
+
+    <p> {{ program.synopsis }}</p>
+    <p> {{ program.category.name }}</p>
+
+    {%  for episode in episodes %}
+        <h1>{{ episode.title }}</h1>
+    {% endfor %}
+
+
+
+
+
+{% endblock %}

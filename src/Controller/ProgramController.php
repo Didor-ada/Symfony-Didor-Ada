@@ -4,16 +4,21 @@
 namespace App\Controller;
 
 use App\Entity\Program;
+use App\Entity\Season;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class ProgramController
+ * @Route("/program" , name="program_")
+ */
 class ProgramController extends AbstractController
 {
     /**
      * Show all rows from Program’s entity
      *
-     * @Route("/liste", name="program_index")
+     * @Route("/", name="index")
      * @return Response A response instance
      */
     public function index(): Response
@@ -29,7 +34,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/programs/{id}", requirements={"id"="\d+"}, methods={"GET"}, name="program_show")
+     * @Route("/{id}", requirements={"id"="\d+"}, methods={"GET"}, name="show")
      */
     public function show(int $id): Response
     {
@@ -44,6 +49,22 @@ class ProgramController extends AbstractController
         }
         return $this->render('program/show.html.twig', [
             'program' => $program,
+            'seasons' => $program->getSeasons()
+        ]);
+    }
+
+    /**
+     * @Route ("/{program}/season/{season}", name="season_show", methods={"GET"})
+     */
+
+    public function showSeason(Program $program, Season $season)
+    {
+        $seasons = $program->getSeasons();
+        $episodes = $season->getEpisodes();
+        return $this->render('Program/season_show.html.twig', [
+            'program' => $program,
+            'seasons' => $seasons,
+            'episodes' => $episodes
         ]);
     }
 

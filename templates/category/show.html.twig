@@ -4,10 +4,11 @@
 {% block body %}
 
 {% for program in programs %}
-    {{ program.id }}
+
     {{ program.title }}
-    {{ program.summary }}
     <hr/>
-    {% endfor %}
+    {% else %}
+    il n'y a aucuns programmes
+{% endfor %}
 
 {% endblock %}

@@ -45,11 +45,11 @@ class CategoryController extends AbstractController
                 'categoryName' => $categoryName]);
         }
 
-        $programByCategory = $this->getDoctrine()
-            ->getRepository(Program::class)
-            ->findBy(['category' => $category], ['id' => 'DESC'], 3);
+        $programByCategory = $category->getPrograms();
 
         return $this->render('category/show.html.twig', [
-            'category' => $category, 'programs' => $programByCategory]);
+            'category' => $category,
+            'programs' => $programByCategory
+        ]);
     }
 }
