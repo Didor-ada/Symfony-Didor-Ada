@@ -13,7 +13,7 @@
     </div>
 
     {%  for season in seasons %}
-        <a href="{{ path ('program_season_show', {program :program.id, season : season.id} )  }}"> saison : {{ season.number }}</a><br/>
+        <a href="{{ path ('program_season_show', {program :program.id, season :season.id} )  }}"> saison : {{ season.number }}</a><br/>
     {% endfor %}
     <a href="{{ path('program_index') }}">
         Retour à la liste des programmes

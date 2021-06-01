@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Entity\Episode;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,23 +35,18 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", requirements={"id"="\d+"}, methods={"GET"}, name="show")
+     * @Route("/{id}", requirements={"id"="\d+"}, methods={"GET"}, name="program_show")
      */
-    public function show(int $id): Response
+    public function show(Program $program, Season $season): Response
     {
-        $program = $this->getDoctrine()
-            ->getRepository(Program::class)
-            ->findOneBy(['id' => $id]);
 
         if (!$program) {
             throw $this->createNotFoundException(
                 'No program with id : '.$id.' found in program\'s table.'
             );
         }
-        return $this->render('program/show.html.twig', [
-            'program' => $program,
-            'seasons' => $program->getSeasons()
-        ]);
+        $seasons = $program->getSeasons();
+        return $this->render('program/show.html.twig', ['program'=>$program, 'seasons'=>$seasons]);
     }
 
     /**
@@ -68,4 +64,20 @@ class ProgramController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Program $program
+     * @param Season $season
+     * @param Episode $episode
+     * @return Response
+     * @Route ("/{program}/season/{season}/episode/{episode}", name="episode_show", methods={"GET"})
+     */
+    public function showEpisode (Program $program, Season $season, Episode $episode)
+    {
+        $seasons = $program->getSeasons();
+        return $this->render('episodes/show.html.twig', [
+            'program' => $program,
+            'seasons' => $seasons,
+            'episodes' => $episode
+        ]);
+    }
 }
