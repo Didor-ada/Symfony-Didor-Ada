@@ -22,11 +22,6 @@ class Season
     /**
      * @ORM\Column(type="integer")
      */
-    private $program_id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $number;
 
     /**
